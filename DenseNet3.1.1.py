@@ -186,7 +186,7 @@ class test_Densenet_hotel:
            writer.add_summary(result_acc,step+1)
            print("step: %d, test accuracy: %.2f" %(step+1, t_acc))
 
-        if t_acc!=1. and (step+1)>=7000 and t_acc>=max_acc:
+        if max_acc!=1. and (step+1)>=7000 and t_acc>=max_acc:
            max_acc=t_acc
            saver.save(sess,save_dir,global_step=step+1)
 
@@ -195,7 +195,7 @@ class test_Densenet_hotel:
            max_acc=t_acc
            saver.save(sess,save_dir,global_step=step+1)
 
-        if count_acc==5:
+        if count_acc==5:#if this model has 5th time with 100% accuracy rate, then break out of iteration
            break
 
     except tf.errors.OutOfRangeError:
